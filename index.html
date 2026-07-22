@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Feliz Aniversário, Bueno!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white selection:bg-gray-800">
+
+    <!-- TELA 1: INTRODUÇÃO HACKER (TERMINAL COMPACTO) -->
+    <div id="intro-screen" class="fixed inset-0 bg-black z-50 flex flex-col justify-center px-6 transition-opacity duration-1000">
+        <div class="max-w-md mx-auto w-full">
+            
+            <!-- Janela do Terminal -->
+            <div class="terminal-window mb-6">
+                <div class="terminal-header">
+                    <div class="terminal-dot bg-red-500"></div>
+                    <div class="terminal-dot bg-yellow-500"></div>
+                    <div class="terminal-dot bg-green-500"></div>
+                    <span class="text-[11px] font-mono text-hacker ml-2 opacity-80">root@bueno-system:~</span>
+                </div>
+                <div id="terminal-content" class="terminal-body text-hacker font-mono text-[13px] md:text-sm flex flex-col gap-1.5">
+                    <!-- Linhas do terminal serão injetadas aqui -->
+                </div>
+            </div>
+
+            <!-- Ação Final do Terminal -->
+            <div id="intro-action" class="hidden opacity-0 transition-opacity duration-1000 flex flex-col items-center justify-center gap-4 mt-4 mx-auto text-center">
+                <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-hacker shadow-hacker relative mx-auto">
+                    <img src="img/paiva2.jpg" alt="Pedro Henrique Buenno" class="w-full h-full object-cover mix-blend-luminosity opacity-80">
+                    <div class="absolute inset-0 bg-[#00ff41]/10"></div>
+                </div>
+                
+                <button onclick="startExperience()" class="px-5 py-2.5 text-xs md:text-sm border border-hacker text-hacker font-mono rounded-lg hover:bg-hacker hover:text-black transition-colors active:scale-95 flex items-center justify-center gap-2 shadow-hacker mx-auto">
+                    <i data-lucide="unlock" class="w-4 h-4"></i>
+                    INICIAR_SISTEMA
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA 2: PRINCIPAL (COM SIDEBAR E MENSAGEM ESPECIAL) -->
+    <div id="main-screen" class="fixed inset-0 overflow-hidden bg-black opacity-0 pointer-events-none transition-opacity duration-1000 z-40 flex">
+        
+        <!-- Backdrop da Sidebar -->
+        <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity opacity-0" onclick="toggleSidebar(false)"></div>
+        
+        <!-- MENU LATERAL (SIDEBAR) -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-[#111111] z-50 transform -translate-x-full transition-transform duration-400 ease-out flex flex-col border-r border-white/5 shadow-2xl">
+            <div class="p-4 pt-10 border-b border-white/10 flex justify-between items-center bg-[#1a1a1a]">
+                <div>
+                    <h2 class="text-white font-bold text-base tracking-tight">Mensagens</h2>
+                    <p class="text-[10px] text-gray-400 mt-0.5">12 pessoas esperando por você</p>
+                </div>
+                <button onclick="toggleSidebar(false)" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 active:scale-90 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div id="sidebar-menu" class="flex-1 overflow-y-auto p-2.5 flex flex-col gap-1 hide-scrollbar bg-[#111111]">
+                <!-- Lista de pessoas injetada via JS -->
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="flex-1 h-full overflow-hidden relative flex flex-col">
+            
+            <div class="absolute inset-0 z-0">
+                <img src="img/paiva3.jpg" alt="Pedro Henrique" class="w-full h-full object-cover opacity-70 scale-105 filter blur-[1px]">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/50"></div>
+            </div>
+
+            <!-- Topo com Menu -->
+            <header class="relative z-20 px-5 pt-8 flex items-center justify-between">
+                <button onclick="toggleSidebar(true)" class="text-white p-2.5 rounded-full hover:bg-white/10 active:scale-90 transition bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <span class="text-[10px] font-mono text-gray-400 tracking-wider uppercase px-2.5 py-1 rounded-full bg-white/5 border border-white/10">VIP ACCESS</span>
+            </header>
+
+            <!-- Conteúdo Central Compacto -->
+            <main class="relative z-20 flex-1 flex flex-col justify-center px-5 max-w-xs mx-auto text-center my-auto pb-6">
+                <div id="main-avatar" class="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white/5 flex items-center justify-center opacity-0 transition-opacity duration-700">
+                    <img src="img/paiva2.jpg" class="w-full h-full object-cover">
+                </div>
+
+                <h1 id="main-title" class="text-xl md:text-2xl font-extrabold tracking-tight text-white mb-2 leading-tight opacity-0 transition-opacity duration-700">
+                    Feliz Aniversário, Pedro!
+                </h1>
+
+                <p id="main-text" class="text-gray-300 text-xs leading-relaxed mb-5 font-normal min-h-[50px]">
+                    <!-- O texto será digitado aqui via JS -->
+                </p>
+
+                <button id="main-btn" onclick="openPersonDetail(1)" class="w-full py-3 px-4 bg-white text-black text-xs font-bold rounded-xl hover:bg-gray-200 transition active:scale-95 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(255,255,255,0.15)] opacity-0 pointer-events-none duration-700">
+                    <span>Ver primeira mensagem</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </main>
+
+            <!-- Rodapé Discreto -->
+            <footer class="relative z-20 pb-5 text-center px-6">
+                <p class="text-[9px] text-gray-500 tracking-widest uppercase font-medium">Família & Amigos do Bueno</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- TELA 3: DETALHES DA PESSOA -->
+    <div id="detail-screen" class="fixed inset-0 bg-black z-50 view-transition view-hidden-right overflow-y-auto pb-12">
+        
+        <!-- Header Maior e Mais Clicável -->
+        <div class="sticky top-0 z-30 px-5 py-4 flex items-center justify-between bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg">
+            <button onclick="closePersonDetail()" class="flex items-center gap-1.5 text-gray-200 hover:text-white transition text-xs font-semibold py-2 px-3 rounded-xl bg-white/10 border border-white/15 active:scale-95">
+                <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                <span>Menu</span>
+            </button>
+            
+            <div class="flex items-center gap-2.5">
+                <button onclick="navigatePerson(-1)" class="py-2 px-3 rounded-xl bg-white/10 border border-white/15 text-gray-200 hover:text-white active:scale-95 transition flex items-center gap-1 text-xs font-semibold">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Anterior</span>
+                </button>
+                <span id="person-counter" class="text-xs font-mono text-gray-300 font-bold px-1">1 / 12</span>
+                <button onclick="navigatePerson(1)" class="py-2 px-3 rounded-xl bg-white/10 border border-white/15 text-gray-200 hover:text-white active:scale-95 transition flex items-center gap-1 text-xs font-semibold">
+                    <span class="hidden sm:inline">Próximo</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Conteúdo Interno -->
+        <div id="detail-inner-content" class="px-5 mt-5 max-w-lg mx-auto transition-all duration-300">
+            <!-- Título e Subtítulo -->
+            <div class="mb-4">
+                <p id="detail-subtitle" class="text-gray-400 text-[11px] uppercase tracking-widest font-semibold mb-1">De: Nome</p>
+                <h1 id="detail-title" class="text-2xl md:text-3xl font-bold mb-1 leading-tight text-white">Título</h1>
+            </div>
+
+            <!-- Grid de 2 Fotos Compactas -->
+            <div id="detail-photos-grid" class="grid grid-cols-2 gap-3 mb-5">
+                <!-- As 2 fotos injetadas aqui -->
+            </div>
+
+            <!-- Carta Fixa Aberta com Ícone -->
+            <div class="bg-[#18181a] rounded-[22px] p-5 mb-5 shadow-xl border border-white/10 relative">
+                <div class="flex items-center gap-3 mb-3 pb-3 border-b border-white/10">
+                    <div class="w-8 h-8 rounded-full bg-[#1ed760]/20 flex items-center justify-center text-[#1ed760]">
+                        <i data-lucide="mail-open" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-white">Mensagem Especial</h4>
+                        <p class="text-[10px] text-gray-400">Escrita com carinho para você</p>
+                    </div>
+                </div>
+                <div id="detail-letter" class="text-xs md:text-sm leading-relaxed text-gray-300 whitespace-pre-wrap font-medium">
+                    Texto aqui...
+                </div>
+            </div>
+
+            <!-- Container do Player Oficial do Spotify -->
+            <div id="spotify-container" class="rounded-[22px] overflow-hidden shadow-2xl mb-5 border border-white/10 bg-[#121214]">
+                <!-- O iframe oficial do Spotify será inserido aqui dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
